@@ -4,3 +4,6 @@
 
 ## Objective-C
 [集合类型](/Objective-C/Collections.md)
+
+## Swift
+[集合类型](/Swift/Collections.md)
