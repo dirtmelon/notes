@@ -1,5 +1,6 @@
 # 集合类型
 ## NSArray/NSMutableArray
+
 通过一个可能为 nil 的数组创建一个可变数组，可以这么写:
 ```objc
 NSMutableArray *mutableObjects = [array mutableCopy];
@@ -15,6 +16,15 @@ NSMutableArray *mutableObjects = [array mutableCopy] ?: [NSMutableArray array];
 ```objc
 NSMutableArray *mutableObjects = [NSMutableArray arrayWithArray:array];
 ```
+
+在数组的开头和结尾插入/删除元素通常是一个 O(1)操作，而随机的插入/删除通常是 O(N) 的。
+`NSArray` 的大多数方法使用 `isEqual:` 来检查对象间的关系，如 `containsObject:` 。如果确定 `NSArray` 中包含你所搜索的对象，使用 `indexOfObjectIdenticalTo:` 可以加快搜索速度。
+
+不要使用 `[@[] mutableCopy]` ，虽然可能会快一点点，使用 `[NSMutableArray array]` 可读性更好。
+
+这里有一篇 `NSArray` 文章写的不错：
+[关于NSArray的二三事](https://juejin.im/post/5b07837df265da0de1011652)
+
 ## NSPointerArray
 [NSPointerArray](https://developer.apple.com/documentation/foundation/nspointerarray)
 
