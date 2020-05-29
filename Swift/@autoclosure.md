@@ -49,6 +49,6 @@ https://github.com/apple/swift/blob/master/stdlib/public/core/Bool.swift#L245-L3
 
 ## 相关资料
 
-[Building assert() in Swift, Part 1: Lazy Evaluation](https://developer.apple.com/swift/blog/?id=4)
-[@AUTOCLOSURE 和 ??](https://swifter.tips/autoclosure/)
-[Using @autoclosure when designing Swift APIs](https://www.swiftbysundell.com/articles/using-autoclosure-when-designing-swift-apis/)
+1. [Building assert() in Swift, Part 1: Lazy Evaluation](https://developer.apple.com/swift/blog/?id=4)
+2. [@AUTOCLOSURE 和 ??](https://swifter.tips/autoclosure/)
+3. [Using @autoclosure when designing Swift APIs](https://www.swiftbysundell.com/articles/using-autoclosure-when-designing-swift-apis/)
