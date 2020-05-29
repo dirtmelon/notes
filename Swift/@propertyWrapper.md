@@ -100,7 +100,7 @@ struct IntWrapper {
 3. 不能在 `protocol` 或者 `extensions` 中声明；
 4. 不支持添加自定义 `set` 或者 `get` 方法；
 
-## 更多应用和例子
+## 相关资料
 
 1. [Property wrappers in Swift](https://www.swiftbysundell.com/articles/property-wrappers-in-swift/)
 2. [0258-property-wrappers.md](https://github.com/apple/swift-evolution/blob/master/proposals/0258-property-wrappers.md#user-defaults)
