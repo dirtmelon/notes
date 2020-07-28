@@ -78,8 +78,8 @@ Operation Queue 中任务对应的类型为 `NSOperation` 类。`NSOperation` �
 - 避免使用锁。Dispatch queue 和 Operation Queue 在大多数情况下都不需要使用锁。避免使用锁来保护共享资源，使用串行队列或者设置 NSOperation 间的依赖来确保以正确的顺序执行任务；
 - 尽量使用系统框架。实现功能时优先考虑现有的系统 API 是否可以满足需求；
 
-## 平台特性
-
+## 具体用法
+[NSOperation](NSOperationn.md)
 [GCD](GCD.md)
 
 ## 相关文章

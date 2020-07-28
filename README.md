@@ -6,7 +6,7 @@
 [集合类型](/Objective-C/Collections.md)
 
 ## 基础知识
-[多线程](/Base/多线程/多线程.md)
+[多线程](/Base/MultiThreading/MultiThreading.md)
 
 ## Swift
 [集合类型](/Swift/Collections.md)
