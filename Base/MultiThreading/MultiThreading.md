@@ -82,6 +82,7 @@ Operation Queue 中任务对应的类型为 `NSOperation` 类。`NSOperation` �
 [NSOperation](NSOperationn.md)
 
 [GCD](GCD.md)
+[pthread 和 NSThread](pthreadAndNSThread.md)
 
 ## 相关文章
 
