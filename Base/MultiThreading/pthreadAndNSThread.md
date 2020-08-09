@@ -56,6 +56,6 @@ Thread Joins 允许你创建一个或多个线程，然后在当前线程中等�
 
 也可以通过 `Operation` 对象间的依赖关系来实现上面的需求。
 
-[iOS多线程：『pthread、NSThread』详尽总结
-](https://juejin.im/post/5a66c9b751882573520d8abc)
+[iOS多线程：『pthread、NSThread』详尽总结](https://juejin.im/post/5a66c9b751882573520d8abc)
+
 [iOS 多线程技术实践之 pthreads（一）](https://kingcos.me/posts/2019/multithreading_techs_in_ios-1/)
