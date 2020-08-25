@@ -1,4 +1,8 @@
 # notes
+## 语言
+[Swift](/Swift/Swift.md)
+[Objective-C](/Objective-C/Objective-C.md)
+
 ## iOS
 [Auto Layout](/iOS/auto-layout.md)
 
@@ -7,13 +11,6 @@
 
 ## 基础知识
 [多线程](/Base/MultiThreading/MultiThreading.md)
-
-## Swift
-[集合类型](/Swift/Collections.md)
-
-[@propertyWrapper](/Swift/@propertyWrapper.md)
-
-[@autoclosure](/Swift/@autoclosure.md)
 
 ## Tools
 [CocoaPods](/Tools/CocoaPods.md)
