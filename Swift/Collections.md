@@ -142,4 +142,4 @@ let firstElement = weakArray.filter { $0 != nil }.first // firstElement is nil
 ### 相关链接
 1. [Swift Arrays Holding Elements With Weak References](https://marcosantadev.com/swift-arrays-holding-elements-weak-references/)
 2. [Swift Tip: Weak Arrays](https://www.objc.io/blog/2017/12/28/weak-arrays/)
-3. [https://swiftrocks.com/weak-dictionary-values-in-swift](Weak Dictionary Values in Swift)
+3. [Weak Dictionary Values in Swift](https://swiftrocks.com/weak-dictionary-values-in-swift)
