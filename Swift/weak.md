@@ -19,9 +19,71 @@ Mike Ash 写的关于 `Swift` 中弱引用实现原理的文章。
 2. 属性，毫无疑问，存储在对象内存中；
 3. 引用计数，现在设备性能足够好，可以牺牲空间还时间，所以可以直接保存在对象内存中；
 
-使用 `SideTable` 解决多余的内存占用问题：
+使用 Side Table 解决多余的内存占用问题：
 
+`Swift` 中 Side Table 对应的类是 `HeapObjectSideTableEntry` ，普通的 `Swift` 对象不包含 Side Table ，使用的是普通的引用计数方法。 对象的内存布局如下：
 
+```
+HeapObject {
+  isa
+  InlineRefCounts {
+    atomic<InlineRefCountBits> {
+      strong RC + unowned RC + flags
+      OR
+      HeapObjectSideTableEntry*
+    }
+  }
+}
+```
+
+一般情况下， `atomic<InlineRefCountBits>` 有 `strong` ， `unowned` 计数和 `flags` 组成。如果有 Side Table ， `atomic<InlineRefCountBits>` 就用于指向 `HeapObjectSideTableEntry` 对象，而 `HeapObjectSideTableEntry` 的布局如下：
+
+```
+HeapObjectSideTableEntry {
+  SideTableRefCounts {
+    object pointer
+    atomic<SideTableRefCountBits> {
+      strong RC + unowned RC + weak RC + flags
+    }
+  }   
+}
+```
+
+`SideTableRefCounts` 中包含对象的地址， `weak` 对象指向的是对应的 `HeapObjectSideTableEntry` ， 通过 `SideTableRefCounts` 获取到对应的对象。
+以下情况会使用 Side Table ：
+1. 创建 `weak` 引用，或者说将来的一些用途；
+2. `strong` 或者 `unowned` 计数溢出， `inline` 计数限制在 32 位；
+3. 关联对象的存储，目前还没实现；
+4. 等等；
+
+[RefCount.h](https://github.com/apple/swift/blob/master/stdlib/public/SwiftShims/RefCount.h)
+
+`Swift` 源码的注释中有详细说明对象在有无 SideTable 下的生命周期。对象的生命周期跟 Side Table 的生命周期是分离的，当强引用计数为 0 而弱引用计数不为了 0 时，只有 `HeapObject` 被释放了，
+被引用对象释放了为什么还能直接访问 Side Table？其实 Swift ABI 中 Side Table 的生命周期与对象是分离的，当强引用计数为 0 时，只有 `HeapObject` 被释放了。只有弱引用计数为 0 后， Side Table 才能得以释放：
+
+```c++
+void HeapObjectSideTableEntry::decrementWeak() {
+  // FIXME: assertions
+  // FIXME: optimize barriers
+  bool cleanup = refCounts.decrementWeakShouldCleanUp();
+  if (!cleanup)
+    return;
+
+  // Weak ref count is now zero. Delete the side table entry.
+  // FREED -> DEAD
+  assert(refCounts.getUnownedCount() == 0);
+  delete this;
+}
+```
+
+虽然 Side Table 只占用很小的内存，如果追求极致的话，可以发发现弱引用释放时手动设置为 `nil` ，释放 Side Table 。
+`Swift` 的实现跟 `Objective-C` 的不同，虽然都是使用 Side Table 来维护引用计数，不同的地方就是 `Objective-C` 对象在内存布局中没有 Side Table 指针，而是通过一个全局的外部来维护对象和 Side Table 之间的关系，效率比 Swift 低。另外 `Objective-C runtime` 在对象释放时会将所有的 __weak 变量都指向 `nil` ，减少内存占用，而 `Swift` 会保持 Side Table 。
+
+相关文章： [从源码解析 Swift 弱引用](https://zhuanlan.zhihu.com/p/58179258)
+
+这里有一篇分析 `Swift3` 中 `weak` 实现的文章 [Swift3之Weak引用](https://zhongwuzw.github.io/2017/06/17/Swift%E4%B9%8BWeak%E5%BC%95%E7%94%A8/) ，虽然说当前版本(5.1) 的实现跟之前的不太一样了，但是文章中提供了一个 `UnsafeBufferPointer` 获取指针大小的内存块，转换成 16 进制来查看具体内容的思路。我们可以通过这个操作来查看引用计数的变化和是否含有 Side Table 。
+
+或许过几个版本再来看又会不同的实现了。
 
 ## 应用
 
