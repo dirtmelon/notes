@@ -4,14 +4,13 @@
 
 [Objective-C](/Objective-C/Objective-C.md)
 
-## iOS
-[Auto Layout](/iOS/auto-layout.md)
-
-## Objective-C
-[集合类型](/Objective-C/Collections.md)
-
 ## 基础知识
 [多线程](/Base/MultiThreading/MultiThreading.md)
+
+## UIKit
+[Auto Layout](/iOS/auto-layout.md)
+
+[点击事件与响应链](/iOS/touch-and-responder-chain.md)
 
 ## Tools
 [CocoaPods](/Tools/CocoaPods.md)
