@@ -12,6 +12,9 @@
 
 [点击事件与响应链](/iOS/touch-and-responder-chain.md)
 
+## Optimization
+[FPS Optimization](Optimization/FPS-Optimization.md)
+
 ## Tools
 [CocoaPods](/Tools/CocoaPods.md)
 
