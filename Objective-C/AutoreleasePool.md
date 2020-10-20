@@ -26,7 +26,7 @@ objc_autoreleasePoolPop(context);
 RunLoop 每次处理事件时也会创建和释放 `autoreleasepool` 。App 启动后，会在主线程的 RunLoop 里注册两个 `autoreleasepool` 相关的 Observer ，其回调的方法都是 `_wrapRunLoopWithAutoreleasePoolHandler()` 。
 
 1. 第一个 Observer 监听的事件是 Entry ，即将进入 Loop ，会调用 `_objc_autoreleasePoolPush()` 来创建自动释放池，order 是 -2147483647 ，优先级最高，确保自动释放池的创建在其它回调之前；
-2. 第二个 Observer 监听了 Exit 事件，当推出 Loop 时调用 `_objc_autoreleasePoolPop()` 来释放自动释放池，order 是 2147483647 ，优先级最低，确保自动释放池的释放在所有回调之后。
+2. 第二个 Observer 监听了 BeforeWaiting 事件，当处理完事件即将进入休眠时调用，会调用 `_objc_autoreleasePoolPop()` 来释放自动释放池，order 是 2147483647 ，优先级最低，确保自动释放池的释放在所有回调之后，同时也会调用 `_objc_autoreleasePoolPush()` 来创建一个新的自动释放池，以供下一次唤醒使用；
 
 ```objectivec
 void *objc_autoreleasePoolPush(void) {
