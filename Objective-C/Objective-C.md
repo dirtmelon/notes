@@ -10,3 +10,5 @@
 [Tagged Pointer](TaggedPointer.md)
 
 [AutoreleasePool](AutoreleasePool.md)
+
+[dealloc](dealloc.md)
