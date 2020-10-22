@@ -96,3 +96,6 @@ Operation Queue 中任务对应的类型为 `NSOperation` 类。`NSOperation` �
 [线程安全类的设计](https://objccn.io/issue-2-4/)
 
 [测试并发程序](https://objccn.io/issue-2-5/)
+
+### 重点
+[iOS探索 多线程面试题分析](https://juejin.im/post/6844904138623418376)
