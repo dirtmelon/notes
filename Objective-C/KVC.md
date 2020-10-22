@@ -81,6 +81,9 @@
 
 在默认的实现中，当你尝试设置一个非对象的属性为 `nil` 时， `KVC` 会调用 `setNilValueForKey:` 方法。这个方法的默认实现会抛出一个 `NSInvalidArgumentException` ，对象可以通过重写这个行为来提供一个默认值或者标记值（ marker value ）。
 
+[iOS 中的 KVC](https://kingcos.me/posts/2019/kvc_in_ios/)
+这篇文章有更详细的说明。
+
 [iOS 开发：『Crash 防护系统』（三）KVC 防护](https://juejin.im/post/6844903934662803464)
 
 `KVC` 崩溃防护。上面提到 `KVC` 相关的崩溃，这篇文章中相关防护也是对这些方法进行 `hook` ，替换掉原来的实现。
