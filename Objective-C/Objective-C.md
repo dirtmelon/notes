@@ -14,3 +14,5 @@
 [dealloc](dealloc.md)
 
 [KVO](KVO.md)
+
+[+load](+load.md)
