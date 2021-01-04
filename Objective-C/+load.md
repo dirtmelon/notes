@@ -1,4 +1,5 @@
 # +load
+## 原理
 官方文档：
 
 [Apple Developer Documentation](https://developer.apple.com/documentation/objectivec/nsobject/1418815-load?language=objc)
@@ -118,6 +119,7 @@ if (cls  &&  cls->isLoadable()) {
 
 `+load` 方法的执行时机非常靠前，而且只会执行一次，所以一般来说我们可能会通过 `+load` 方法来执行一些 `hook` 操作，但是如果 `+load` 方法过多或者方法执行时间较长，就会影响增加应用的启动时间，所以在编写 `+load` 方法时需要非常小心。
 
+## 监控 +load 方法的耗时
 这篇文章讲述了如何监控 `+load` 方法的耗时：
 
 [计算 +load 方法的耗时](https://triplecc.github.io/2019/05/27/%E8%AE%A1%E7%AE%97load%E8%80%97%E6%97%B6/)
@@ -230,3 +232,31 @@ static void hookAllLoadMethods(LMLoadInfoWrapper *infoWrapper) {
 相应的实现：
 
 [tripleCC/Laboratory](https://github.com/tripleCC/Laboratory/tree/master/HookLoadMethods)
+
+## 应用
+
+[Notification Once](https://blog.sunnyxx.com/2015/03/09/notification-once/)
+
+利用 `+load` 的方法调用时机较早，实现 `AppDelegate` 的瘦身：
+
+```objectivec
+/// FooModule.m
++ (void)load
+{
+    __block id observer =
+    [[NSNotificationCenter defaultCenter]
+     addObserverForName:UIApplicationDidFinishLaunchingNotification
+     object:nil
+     queue:nil
+     usingBlock:^(NSNotification *note) {
+         [self setup]; // Do whatever you want
+         [[NSNotificationCenter defaultCenter] removeObserver:observer];
+     }];
+}
+```
+
+- `+ load`方法在足够早的时间点被调用；
+- `block` 版本的通知注册会产生一个`__NSObserver *`对象用来给外部 `remove` 观察者；
+- `block` 对 `observer` 对象的捕获早于函数的返回，所以若不加`__block`，会捕获到 `nil` ；
+- 在 `block` 执行结束时移除 `observer` ，无需其他清理工作；
+- 这样，在模块内部就完成了在程序启动点代码的挂载。
