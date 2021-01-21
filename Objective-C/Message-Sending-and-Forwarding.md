@@ -67,6 +67,19 @@ IMP class_getMethodImplementation(Class cls, SEL sel)
 }
 ```
 
+[深入理解 Objective-C：方法缓存](https://tech.meituan.com/2015/08/12/deep-understanding-object-c-of-method-caching.html)
+
+为什么需要缓存：
+
+1. 大部分方法不会只调用一次，而且往往重复的几率较高；
+2. 当一个方法在比较“上层”的类中，而使用比较“下层”的对象去调用时，如果没有缓存，整个遍历就会比较耗时。
+
+使用散列表来进行缓存，具体代码分析可以查看上面的文章，使用散列表可以加快检索速度。
+
+[浅尝 objc_msgSend](https://kingcos.me/posts/2019/objc_msgsend/)
+
+对 `objc_msgSend` 整体流程进行研究，包括消息发送，动态方法解析以及消息转发三部分。
+
 ## 消息转发 Forwarding
 
 [mikeash.com: Friday Q&A 2009-03-27: Objective-C Message Forwarding](https://mikeash.com/pyblog/friday-qa-2009-03-27-objective-c-message-forwarding.html)
