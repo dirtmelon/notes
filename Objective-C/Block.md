@@ -5,7 +5,7 @@
 
 里面有提到作用域：
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/da5f48f1-3554-48bf-8f5f-1c1d3ae7ec2d/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/da5f48f1-3554-48bf-8f5f-1c1d3ae7ec2d/Untitled.png)
+![](media/16126836298702.jpg)
 
 - `_NSConcreteStackBlock` ：只用到外部局部变量、成员属性变量，且没有强指针引用的 `block` 都是 `StackBlock` 。 `StackBlock` 的生命周期由系统控制的，一旦返回之后，就被系统销毁了。
 - `_NSConcreteMallocBlock` ：有强指针引用或 `copy` 修饰的成员属性引用的 `block` 会被复制一份到堆中成为 `MallocBlock` ，没有强指针引用即销毁，生命周期由程序员控制
@@ -13,7 +13,7 @@
 
 `__block` 结构体 `__forwarding` ：
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e4d31728-5d51-4df3-afe3-7330b80a53c4/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e4d31728-5d51-4df3-afe3-7330b80a53c4/Untitled.png)
+![](media/16126836549728.jpg)
 
 ## Block 技巧与底层解析
 
@@ -418,7 +418,7 @@ Block 内可以直接修改
 
 上面说到 Block 会生成不同的结构体，也就说使用 Block 实现的功能代码量会较多。
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1795c626-c81e-4ca6-a29d-5e1ba913839c/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1795c626-c81e-4ca6-a29d-5e1ba913839c/Untitled.png)
+![](media/16126837202277.jpg)
 
 循环引用：
 
@@ -471,7 +471,7 @@ int main_22(int argc, const char * argv[]) {
 // 20
 ```
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c748bf8f-e8d6-4c5a-8286-8ceab32ea0d5/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c748bf8f-e8d6-4c5a-8286-8ceab32ea0d5/Untitled.png)
+![](media/16126837512894.jpg)
 
 ## 用 Block 实现 delegate 方法
 
