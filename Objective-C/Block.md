@@ -388,7 +388,7 @@ int main_3(int argc, const char * argv[]) {
 }
 ```
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d9751146-88e2-4045-ac20-f45d639cb9d4/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d9751146-88e2-4045-ac20-f45d639cb9d4/Untitled.png)
+![](media/16126838745633.jpg)
 
 Block 对于捕获变量的不同也会有不同的处理
 
