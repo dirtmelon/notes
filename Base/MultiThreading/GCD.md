@@ -217,3 +217,11 @@ void EarlyBailoutAtomicBuiltinsOnce(dispatch_once_t *predicate, dispatch_block_t
     所以解决办法只能是自己分析各 `thread` 的 `call stack` ，根据用户场景分析当前正在消耗的系统资源。后面也确实通过最近提交的代码分析，发现是由于增加了一些非常耗时的磁盘 io 任务（虽然也是放在在子线程），才出现这个看着不怎么沾边的 `call stack` 。revert 之后卡顿警报就消失了。
 2. 现有的卡顿检测工具都只能在超时的情况下 `dump call stack` ，但出现超时有可能是任务 A，B，C 共同作用导致的，A 和 B 可能是真正耗时的任务，C 不耗时但碰巧是最后一个，所以被当成元凶，而 A 和 B 却没有出现在上报日志里。我暂时也没有想到特别好的解决办法。很明显，`libsystem_kernel.dylib __workq_kernreturn` 就是一个不怎么耗时的 C 任务。
 3. 在使用 GCD 创建 queue，或者说一个 App 内部使用 GCD 执行子线程任务时，最好有一套 App 所有团队都能遵循的队列使用机制，避免创建过多的 `thread` ，而出现意料之外的线程资源紧缺，代码无法及时执行的情况。这很难，尤其是在大公司动则上百人的团队里面。
+
+### GCD 原理详解
+
+[bestswifter/blog](https://github.com/bestswifter/blog/blob/master/articles/objc-gcd.md)
+
+## 如何取消 `dispatch_after` 的 Block
+
+[Canceling Blocks in GCD](https://mattrajca.com/2016/04/23/canceling-blocks-in-gcd.html)
