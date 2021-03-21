@@ -22,3 +22,7 @@
 [initialize](initialize.md)
 
 [Block](Block.md)
+
+## 小技巧
+
+[如何获取某个类的全部子类](getting-subclasses-of-objective-c-class.md)
