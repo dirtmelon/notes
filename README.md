@@ -12,10 +12,10 @@
 
 [点击事件与响应链](/iOS/touch-and-responder-chain.md)
 
-## Architecture
+## 架构
 [MVC](/Architecture/MVC.md)
 
-## Optimization
+## 优化
 [FPS Optimization](Optimization/FPS-Optimization.md)
 
 ## Tools
